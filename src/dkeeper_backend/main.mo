@@ -13,6 +13,7 @@ actor DKeeper{
   };
 
   //var to keep track of all notes (similar to array storage)
+  //lists are more efficient than arrays on the blockchain
   var notes: List.List<Note> = List.nil<Note>(); //creating list to store all note. Initializing as empty.
 
   public func createNote(titleText: Text, contentText: Text){
@@ -24,6 +25,12 @@ actor DKeeper{
     //pre-append new note to notes list. 
     notes := List.push(newNote, notes);
     Debug.print(debug_show(notes));
-  }
+  };
+
+  //async query function that returns an array of notes.
+  //converting list to array so that frontend reading data from backend is easier 
+  public query func readNotes(): async [Note] {
+    return List.toArray(notes);
+  };
 
 }

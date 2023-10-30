@@ -5,7 +5,7 @@ function CreateArea(props) {
     //creating an object that tracks the state of the input to make a note
     const[note, setNote] = useState({
         title: "",
-        noteBody:""
+        content:""
     });
 
     function updateNote(event){
@@ -17,12 +17,12 @@ function CreateArea(props) {
             if(inputName === "title"){
                 return{
                     title: inputValue,
-                    noteBody:prevNote.noteBody
+                    content:prevNote.content
                 };
             } else if(inputName === "content"){
                 return{
                     title: prevNote.title,
-                    noteBody: inputValue
+                    content: inputValue
                 };
             }
         });
@@ -33,7 +33,7 @@ function CreateArea(props) {
             props.create(note);
             setNote({
                 title: "",
-                noteBody: ""
+                content: ""
             });
     }
 
@@ -41,7 +41,7 @@ function CreateArea(props) {
     <div>
       <form className="create-note">
         <input onChange={updateNote} name="title" placeholder="Title" value={note.title}/>
-        <textarea onChange={updateNote} name="content" placeholder="Take a note..." rows="3" value={note.noteBody}/>
+        <textarea onChange={updateNote} name="content" placeholder="Take a note..." rows="3" value={note.content}/>
         <button onClick={submitNote}>Add</button>
       </form>
     </div>
