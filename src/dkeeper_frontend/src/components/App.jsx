@@ -3,6 +3,7 @@ import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import Note from "./Note.jsx";
 import CreateArea from "./CreateArea.jsx";
+import { dkeeper_backend } from "../../../declarations/dkeeper_backend";
 
 
 function App() {
@@ -12,6 +13,9 @@ function App() {
     //we pass over "note" from create area component using props
     function addNote(note){
         setNotes((prevNotes) => {
+            //create note in the ICP backend to persist data
+            dkeeper_backend.createNote(note.title, note.noteBody);
+            //update frontend with new note
             return[...prevNotes, note];
         });
     }
