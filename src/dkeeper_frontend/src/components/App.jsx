@@ -15,12 +15,14 @@ function App() {
         setNotes((prevNotes) => {
             //create note in the ICP backend to persist data
             dkeeper_backend.createNote(note.title, note.content);
+
+
             //update frontend with new note, place new note to the front of array (pre-append).
             return[note,...prevNotes];
         });
     }
 
-    //triggered everytime render function is called in react
+    //triggered everytime render function is called in react. this is allows us to display notes form backend
     //passing an empty array as the second arguement tells useEffect to run only once
     useEffect(() => {
         //calling async function, doing this seperatly since use effect can not be turned into async function
@@ -35,6 +37,7 @@ function App() {
     }
 
     function deleteNote(id){
+        dkeeper_backend.removeNote(id);
         setNotes((prevNotes) => {
             return prevNotes.filter((note, index) => {
                 return index !==id;
